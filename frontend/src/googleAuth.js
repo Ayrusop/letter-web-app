@@ -5,7 +5,7 @@ const GoogleLogin = () => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        axios.get("http://localhost:5000/auth/user", { withCredentials: true }) .then((res) => {
+        axios.get("http://localhost:5000/auth/user", { withCredentials: true }).then((res) => {
             setUser(res.data);
         });
     }, []);
@@ -15,9 +15,15 @@ const GoogleLogin = () => {
     };
 
     const handleLogout = () => {
-        axios.get("http://localhost:5000/auth/logout", { withCredentials: true }).then(() => {
-            setUser(null);
+        axios.get("http://localhost:5000/auth/logout", { withCredentials: true })
+        .then(() => {
+            // Handle the successful logout
+            setUser(null); // Or update state accordingly
+        })
+        .catch((error) => {
+            console.error("Error during logout:", error);
         });
+    
     };
 
     return (
